@@ -35,11 +35,11 @@ app.get("/", (req, res) => {
 
 app.get("/artist-search", (req, res) => {
   const { artist } = req.query;
-  console.log(req.query);
+  // console.log(req.query);
   spotifyApi
     .searchArtists(`${artist}`)
     .then((data) => {
-      console.log("The received data from Api ", data.body.artists.items);
+      // console.log("The received data from Api ", data.body.artists.items);
       const info = {
         image: data.body.artists.items[0].images[0].url,
         name: data.body.artists.items[0].name,
@@ -47,6 +47,20 @@ app.get("/artist-search", (req, res) => {
       };
 
       res.render("artist-search-results", { info });
+    })
+    .catch((err) => console.log(err));
+});
+
+app.get("/albums/:id", (req, res, next) => {
+  const { id } = req.params;
+  console.log(req.params.id);
+  spotifyApi
+    .getArtistAlbums({ id })
+    .then((albResponse) => {
+      console.log("Artist albums", albResponse.body);
+      res.render("albums", {
+        albumsList,
+      });
     })
     .catch((err) => console.log(err));
 });
