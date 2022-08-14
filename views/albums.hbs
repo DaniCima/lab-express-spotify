@@ -1,15 +1,11 @@
 <div class="description">
-    <h2><u>Search Results Page</u></h2>
+ 
+        {{#each albums}}
+    <h2>{{this.name}}</h2>
     <br />
-    <p>You're looking for {{artistAlbum}}, there was {{totalResults}} albums matching your search</p>
-    <br>
-    
-        {{#each Search}}
-<h2>{{info.name}}</h2>
+    <a href=""><img src="{{this.image.2.url}}" alt="cover-album" width="100px" height="100px" /></a>
     <br />
-    <a href=""><img src="{{info.image}}" alt="band" width="100px" height="100px" /></a>
-    <br />
-    <a href="/albums/{{info.id}}">View Albums</a>
+    <a href="/tracks/{{this.id}}">View Tracks</a>
     </ul>
         {{/each}}
 
